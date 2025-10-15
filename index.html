@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weebly - Your Ultimate Anime Destination</title>
+    <link rel="icon" type="image/png" href="weebly.png">
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        // Quick test function for debugging
+        function testLogin() {
+            console.log('Testing login...');
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            console.log('Users in storage:', users);
+            
+            const adminUser = users.find(u => u.username === 'admin');
+            console.log('Admin user found:', adminUser);
+            
+            if (adminUser) {
+                console.log('Admin credentials: username=admin, password=admin123');
+                console.log('Admin isAdmin:', adminUser.isAdmin);
+            }
+        }
+        
+        // Run test when page loads
+        window.addEventListener('load', testLogin);
+    </script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation Header -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="weebly.png" alt="Weebly Logo" class="logo-image">
+                <span>Weebly</span>
+            </div>
+            
+            <div class="nav-menu">
+                <a href="#" class="nav-link active" id="newLink">New</a>
+                <a href="#" class="nav-link" id="popularLink">Popular</a>
+                <a href="#" class="nav-link" id="simulcastLink">Simulcast</a>
+                <div class="dropdown">
+                    <a href="#" class="nav-link dropdown-toggle">Categories <i class="fas fa-chevron-down"></i></a>
+                    <div class="dropdown-content">
+                        <div class="dropdown-column">
+                            <a href="#">Browse All (A-Z)</a>
+                            <a href="#">Release Calendar</a>
+                        </div>
+                        <div class="dropdown-column">
+                            <h4>GENRES</h4>
+                            <a href="#" data-genre="action">Action</a>
+                            <a href="#" data-genre="adventure">Adventure</a>
+                            <a href="#" data-genre="comedy">Comedy</a>
+                            <a href="#" data-genre="drama">Drama</a>
+                            <a href="#" data-genre="fantasy">Fantasy</a>
+                            <a href="#" data-genre="music">Music</a>
+                            <a href="#" data-genre="romance">Romance</a>
+                            <a href="#" data-genre="sci-fi">Sci-Fi</a>
+                            <a href="#" data-genre="seinen">Seinen</a>
+                            <a href="#" data-genre="shojo">Shojo</a>
+                            <a href="#" data-genre="shonen">Shonen</a>
+                            <a href="#" data-genre="slice-of-life">Slice of Life</a>
+                            <a href="#" data-genre="sports">Sports</a>
+                            <a href="#" data-genre="supernatural">Supernatural</a>
+                            <a href="#" data-genre="thriller">Thriller</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="nav-actions">
+                <button class="nav-icon" id="searchBtn"><i class="fas fa-search"></i></button>
+                <button class="nav-icon" id="watchlistBtn" title="Watchlist"><i class="fas fa-bookmark"></i></button>
+                <button class="nav-icon" id="favoritesBtn" title="Favorites"><i class="fas fa-heart"></i></button>
+                <button class="nav-icon" id="recentBtn" title="Recently Viewed"><i class="fas fa-history"></i></button>
+                <button class="nav-icon" id="randomBtn" title="Random Anime"><i class="fas fa-random"></i></button>
+                <div class="user-menu">
+                    <button class="nav-icon user-avatar" id="userBtn">
+                        <i class="fas fa-user"></i>
+                    </button>
+                    <div class="user-dropdown" id="userDropdown">
+                        <a href="#" id="loginBtn">Login</a>
+                        <a href="#" id="signupBtn">Sign Up</a>
+                        <a href="#" id="adminBtn" style="display: none;">Admin Panel</a>
+                        <a href="#" id="logoutBtn" style="display: none;">Logout</a>
+                    </div>
+                </div>
+                <div class="notification-bell">
+                    <button class="nav-icon" id="notificationBtn" title="Notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge" id="notificationBadge" style="display: none;">0</span>
+                    </button>
+                    <div class="notification-dropdown" id="notificationDropdown">
+                        <div class="notification-header">
+                            <h3>Notifications</h3>
+                            <button class="clear-notifications" id="clearNotifications">Clear All</button>
+                        </div>
+                        <div class="notification-list" id="notificationList">
+                            <div class="no-notifications">No new notifications</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Overlay -->
+    <div class="search-overlay" id="searchOverlay">
+        <div class="search-header">
+            <h1 class="search-title">Find Your Anime</h1>
+        </div>
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Search anime, movies, and more...">
+            <button class="search-close" id="searchClose"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="search-results" id="searchResults"></div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-slider" id="heroSlider">
+            <!-- Top 5 trending anime will be populated by JavaScript -->
+        </div>
+        <div class="hero-navigation">
+            <button class="hero-nav prev" onclick="changeSlide(-1)"><i class="fas fa-chevron-left"></i></button>
+            <button class="hero-nav next" onclick="changeSlide(1)"><i class="fas fa-chevron-right"></i></button>
+        </div>
+        <div class="hero-indicators" id="heroIndicators">
+            <!-- Indicators will be populated by JavaScript -->
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+        <!-- Popular Anime Section -->
+        <section class="content-section">
+            <div class="section-header">
+                <h2>Trending Anime Movies</h2>
+                <div class="filter-tabs">
+                    <button class="filter-tab active" data-filter="all">All</button>
+                    <button class="filter-tab" data-filter="2020-2025">2020-2025</button>
+                    <button class="filter-tab" data-filter="2015-2019">2015-2019</button>
+                    <button class="filter-tab" data-filter="2010-2014">2010-2014</button>
+                    <button class="filter-tab" data-filter="2000-2009">2000-2009</button>
+                </div>
+            </div>
+            <div class="anime-grid" id="animeGrid">
+                <!-- Anime cards will be populated by JavaScript -->
+            </div>
+        </section>
+
+        <!-- Recently Viewed Section -->
+        <section class="content-section" id="recentlyViewedSection" style="display: none;">
+            <div class="section-header">
+                <h2>Recently Viewed</h2>
+                <a href="#" class="view-all" onclick="showRecentlyViewed()">VIEW ALL <i class="fas fa-chevron-right"></i></a>
+            </div>
+            <div class="anime-grid" id="recentlyViewedGrid">
+                <!-- Recently viewed items will be populated by JavaScript -->
+            </div>
+        </section>
+
+        <!-- Simulcasts Section -->
+        <section class="content-section">
+            <div class="section-header">
+                <h2>The hottest new and continuing simulcasts have arrived!</h2>
+            </div>
+            <div class="anime-carousel" id="simulcastCarousel">
+                <!-- Simulcast items will be populated by JavaScript -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Anime Modal -->
+    <div class="modal" id="animeModal">
+        <div class="modal-content">
+            <span class="modal-close" id="modalClose">&times;</span>
+            <div class="modal-body" id="modalBody">
+                <!-- Modal content will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Video Modal -->
+    <div class="modal" id="videoModal">
+        <div class="modal-content video-modal">
+            <span class="modal-close" id="videoClose">&times;</span>
+            <div class="video-container" id="videoContainer">
+                <!-- Video will be embedded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content auth-modal">
+            <span class="modal-close" id="loginClose">&times;</span>
+            <div class="auth-container">
+                <h2>Login to Weebly</h2>
+                <form id="loginForm">
+                    <div class="form-group">
+                        <input type="text" id="loginUsername" placeholder="Username" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="loginPassword" placeholder="Password" required>
+                    </div>
+                    <button type="submit" class="btn-primary">Login</button>
+                </form>
+                <p class="auth-switch">
+                    Don't have an account? <a href="#" id="switchToSignup">Sign up here</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div class="modal" id="signupModal">
+        <div class="modal-content auth-modal">
+            <span class="modal-close" id="signupClose">&times;</span>
+            <div class="auth-container">
+                <h2>Join Weebly</h2>
+                <form id="signupForm">
+                    <div class="form-group">
+                        <input type="text" id="signupUsername" placeholder="Username" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="signupEmail" placeholder="Email" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="signupPassword" placeholder="Password" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="signupConfirmPassword" placeholder="Confirm Password" required>
+                    </div>
+                    <button type="submit" class="btn-primary">Sign Up</button>
+                </form>
+                <p class="auth-switch">
+                    Already have an account? <a href="#" id="switchToLogin">Login here</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Panel Modal -->
+    <div class="modal" id="adminModal">
+        <div class="modal-content admin-modal">
+            <span class="modal-close" id="adminClose">&times;</span>
+            <div class="admin-container">
+                <h2>Admin Panel</h2>
+                <div class="admin-tabs">
+                    <button class="admin-tab active" data-tab="anime">Manage Anime</button>
+                    <button class="admin-tab" data-tab="users">Manage Users</button>
+                </div>
+                <div class="admin-content">
+                    <div class="admin-tab-content active" id="animeTab">
+                        <div class="admin-stats">
+                            <div class="stat-card">
+                                <h3>Total Anime</h3>
+                                <div class="stat-number" id="totalAnimeCount">0</div>
+                            </div>
+                            <div class="stat-card">
+                                <h3>Total Users</h3>
+                                <div class="stat-number" id="totalUsersCount">0</div>
+                            </div>
+                        </div>
+                        <div class="admin-actions">
+                            <button class="btn-primary" onclick="showAddAnimeForm()">Add New Anime</button>
+                        </div>
+                        <div class="admin-table">
+                            <table id="animeTable">
+                                <thead>
+                                    <tr>
+                                        <th>Title</th>
+                                        <th>Year</th>
+                                        <th>Genre</th>
+                                        <th>Rating</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="animeTableBody">
+                                    <!-- Anime data will be populated here -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="admin-tab-content" id="usersTab">
+                        <div class="admin-table">
+                            <table id="usersTable">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Join Date</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="usersTableBody">
+                                    <!-- User data will be populated here -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cat Section -->
+    <section class="cat-section">
+        <div class="cat-container">
+            <img src="image.png" alt="Sleeping Cats" class="cat-image">
+            <div class="cat-message">
+                <h2>Still looking for something to watch?</h2>
+                <p>Check out our full library</p>
+            </div>
+            <button class="view-all-btn" onclick="showAllAnime()">VIEW ALL</button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-left">
+                <div class="footer-logo">
+                    <img src="weebly.png" alt="Weebly Logo" class="footer-logo-img">
+                    <span class="footer-brand">Weebly</span>
+                </div>
+                <p class="footer-copyright">© 2024 Weebly. All rights reserved.</p>
+            </div>
+            <div class="footer-right">
+                <h3 class="team-title">Development Team</h3>
+                <div class="team-members">
+                    <p>YASH KUMAR RAUT</p>
+                    <p>AKHILESH KUMAR</p>
+                    <p>RISHU MEHTA</p>
+                    <p>SHIVANI PANIGRAHI</p>
+                    <p>SOUMYA SMRUTI BISWAL</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
