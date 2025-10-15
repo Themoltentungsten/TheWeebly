@@ -42,14 +42,6 @@ A comprehensive, responsive anime streaming website clone featuring 100 trending
 - **Desktop Experience** - Full-featured desktop interface
 - **Touch-Friendly** - Optimized for touch interactions
 
-## 📸 Screenshots
-
-![Screenshot 1](Screenshots/image.png)
-
-![Screenshot 2](Screenshots/image1.png)
-
-![Screenshot 3](Screenshots/image2.png)
-
 ## 🚀 Getting Started
 
 ### Prerequisites
@@ -135,11 +127,6 @@ AnimeStream/
 - **Local Storage** - Data persistence
 - **Responsive Design** - Mobile-first approach
 
-### Browser Compatibility
-- Chrome 60+
-- Firefox 55+
-- Safari 12+
-- Edge 79+
 
 ### Performance Features
 - **Lazy Loading** - Optimized image loading
@@ -204,59 +191,23 @@ The database includes anime from various genres:
 3. Add new anime objects following the existing format
 4. Include all required fields (title, year, genre, etc.)
 
-## 🔒 Security Features
+### Team Members
+1. Yash Kumar Raut
+2. Akhilesh Kumar
+3. Rishu Mehta
+4. Shivani Panigrahi
+5. Soumya Smruti Biswal
 
-### Data Protection
-- **Local Storage** - Secure client-side data storage
-- **Input Validation** - Form validation and sanitization
-- **XSS Prevention** - Safe HTML rendering
-- **CSRF Protection** - Secure form submissions
+## 📸 Screenshots
 
-## 📈 Performance Metrics
+![Screenshot 1](Screenshots/image.png)
 
-### Optimization Features
-- **Fast Load Times** - Optimized images and code
-- **Smooth Animations** - 60fps animations
-- **Efficient Rendering** - Virtual scrolling for large lists
-- **Memory Management** - Proper cleanup and garbage collection
+![Screenshot 2](Screenshots/image1.png)
 
-## 🤝 Contributing
+![Screenshot 3](Screenshots/image2.png)
 
-### How to Contribute
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Test thoroughly
-5. Submit a pull request
-
-### Development Guidelines
-- Follow existing code style
-- Add comments for complex logic
-- Test on multiple devices
-- Ensure responsive design
-- Validate all inputs
-
-## 📄 License
-
-This project is open source and available under the MIT License.
-
-## 🙏 Acknowledgments
-
-- **Crunchyroll** - Design inspiration and UI patterns
-- **Studio Ghibli** - For amazing anime content
-- **Font Awesome** - Beautiful icons
-- **Unsplash** - High-quality images
-- **YouTube** - Video hosting and embedding
-
-## 📞 Support
-
-For support, questions, or feature requests:
-- Create an issue in the repository
-- Contact the development team
-- Check the documentation
-
----
 
 **Weebly** - Your Ultimate Anime Destination 🎌
 
 *Built with ❤️ for anime lovers worldwide*
+
